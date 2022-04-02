@@ -39,28 +39,13 @@ def calculate_BMI_category_and_health_risk(data):
     """
     data_frame = pd.DataFrame(data,columns=["Gender","HeightCm","WeightKg"])
     data_frame["BMI"] = calculate_BMI(data_frame.HeightCm,data_frame.WeightKg)
-    data_frame.loc[data_frame.BMI <= 18.4,
-                   ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]] = ["Underweight", "18.4 and below",
-                                                                            "Malnutrition risk"]
-
-    data_frame.loc[(data_frame.BMI >= 18.5) & (data_frame.BMI <=24.9),
-                   ["BMI Category","BMI Range (kg/m2)","Health Risk"]] = ["Normal weight","18.5 - 24.9","Low risk"]
-
-    data_frame.loc[(data_frame.BMI >= 25) & (data_frame.BMI <= 29.9),
-                   ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]] = ["Overweight", "25 - 29.9",
-                                                                            "Enhanced risk"]
-
-    data_frame.loc[(data_frame.BMI >= 30) & (data_frame.BMI <= 34.9),
-                   ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]] = ["Moderately Obese", "30 - 34.9",
-                                                                            "Medium risk"]
-
-    data_frame.loc[(data_frame.BMI >= 35) & (data_frame.BMI <= 39.9),
-                   ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]] = ["Severely Obese", "35 - 39.9",
-                                                                            "High risk"]
-
-    data_frame.loc[data_frame.BMI >= 40,
-                   ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]] = ["Very Severely Obese", "40 and above",
-                                                                            "Very High risk"]
+    new_columns = ["BMI Category", "BMI Range (kg/m2)", "Health Risk"]
+    data_frame.loc[data_frame.BMI <= 18.4, new_columns] = ["Underweight", "18.4 and below","Malnutrition risk"]
+    data_frame.loc[(data_frame.BMI >= 18.5) & (data_frame.BMI <=24.9), new_columns] = ["Normal weight","18.5 - 24.9","Low risk"]
+    data_frame.loc[(data_frame.BMI >= 25) & (data_frame.BMI <= 29.9), new_columns] = ["Overweight", "25 - 29.9", "Enhanced risk"]
+    data_frame.loc[(data_frame.BMI >= 30) & (data_frame.BMI <= 34.9), new_columns] = ["Moderately Obese", "30 - 34.9","Medium risk"]
+    data_frame.loc[(data_frame.BMI >= 35) & (data_frame.BMI <= 39.9), new_columns] = ["Severely Obese", "35 - 39.9", "High risk"]
+    data_frame.loc[data_frame.BMI >= 40, new_columns] = ["Very Severely Obese", "40 and above", "Very High risk"]
     del data_frame["BMI"]
     return data_frame
 
